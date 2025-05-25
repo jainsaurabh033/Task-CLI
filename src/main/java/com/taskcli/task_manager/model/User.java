@@ -1,16 +1,20 @@
 package com.taskcli.task_manager.model;
 
+import com.taskcli.task_manager.Enum.Role;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Setter;
 
-//@Data
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public String getEmail() {
         return email;
@@ -28,6 +32,11 @@ public class User {
         this.id = id;
     }
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
