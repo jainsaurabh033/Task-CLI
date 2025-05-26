@@ -18,6 +18,18 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status =  TaskStatus.PENDING;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "creator_id")
+    private User creator;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Subtask> subtasks;
+    private LocalDate dueDate;
 
 
     public User getCreator() {
@@ -75,17 +87,4 @@ public class Task {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    private String description;
-
-    @Enumerated(EnumType.STRING)
-    private TaskStatus status =  TaskStatus.PENDING;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creator_id")
-    private User creator;
-
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Subtask> subtasks;
-    private LocalDate dueDate;
 }

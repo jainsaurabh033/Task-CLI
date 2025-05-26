@@ -1,29 +1,28 @@
 package com.taskcli.task_manager.service;
 
-import com.taskcli.task_manager.exception.UserNotFoundException;
+import com.taskcli.task_manager.dto.RegisterRequest;
+import com.taskcli.task_manager.Enum.Role;
 import com.taskcli.task_manager.model.User;
 import com.taskcli.task_manager.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UserService {
+
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @Transactional
-    public User createUser(String email){
+    public User registerUser(RegisterRequest request) {
         User user = new User();
-        user.setEmail(email);
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setRole(Role.valueOf(request.getRole().toUpperCase()));
         return userRepository.save(user);
-    }
-
-    @Transactional
-    public User getUserById(Long id){
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 }

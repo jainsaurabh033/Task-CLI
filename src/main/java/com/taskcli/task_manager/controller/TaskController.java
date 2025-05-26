@@ -1,14 +1,12 @@
 package com.taskcli.task_manager.controller;
 
-import com.taskcli.task_manager.DTO.TaskCreateRequest;
+import com.taskcli.task_manager.dto.TaskCreateRequest;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.service.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/tasks")

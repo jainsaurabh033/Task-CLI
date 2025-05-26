@@ -1,6 +1,6 @@
 package com.taskcli.task_manager.service;
 
-import com.taskcli.task_manager.DTO.TaskCreateRequest;
+import com.taskcli.task_manager.dto.TaskCreateRequest;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.model.User;
 import com.taskcli.task_manager.repository.TaskRepository;
@@ -10,9 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.awt.print.Pageable;
-import java.util.List;
 
 @Service
 //@RequiredArgsConstructor
