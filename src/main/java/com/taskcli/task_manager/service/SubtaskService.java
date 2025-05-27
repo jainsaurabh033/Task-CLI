@@ -1,11 +1,14 @@
 package com.taskcli.task_manager.service;
+import com.taskcli.task_manager.controller.SubtaskResponse;
 import com.taskcli.task_manager.model.Subtask;
 import com.taskcli.task_manager.repository.SubtaskRepository;
 import com.taskcli.task_manager.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SubtaskService {
@@ -25,11 +28,13 @@ public class SubtaskService {
         }).orElseThrow(() -> new RuntimeException("Task not found with id: " + taskId));
     }
 
-    public List<Subtask> getSubtasksByTaskId(Long taskId) {
-        return subtaskRepository.findAll()
-                .stream()
-                .filter(subtask -> subtask.getTask() != null && subtask.getTask().getId().equals(taskId))
-                .toList();
+    public List<SubtaskResponse> getSubtasksByTaskId(Long taskId) {
+        List<Subtask> subtasks = subtaskRepository.findAll().stream().filter(subtask -> subtask.getTask()!=null
+        && taskId.equals(subtask.getTask().getId())).toList();
+
+        return subtasks.stream()
+                .map(s -> new SubtaskResponse(s.isCompleted(), s.getId(), s.getTitle()))
+                .collect(Collectors.toList());
     }
 
     public Subtask updateSubtaskStatus(Long subtaskId, boolean completed) {

@@ -24,9 +24,9 @@ public class SubtaskController {
     }
 
     @GetMapping("/task/{taskId}")
-    public ResponseEntity<List<Subtask>> getSubtasksByTask(@PathVariable Long taskId) {
-        List<Subtask> subtasks = subtaskService.getSubtasksByTaskId(taskId);
-        return ResponseEntity.ok(subtasks);
+    public ResponseEntity<List<SubtaskResponse>> getSubtasksByTask(@PathVariable Long taskId) {
+        List<SubtaskResponse> responses  = subtaskService.getSubtasksByTaskId(taskId);
+        return ResponseEntity.ok(responses);
     }
 
     @PutMapping("/{subtaskId}/status")
