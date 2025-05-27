@@ -3,10 +3,9 @@ package com.taskcli.task_manager.controller;
 import com.taskcli.task_manager.model.Subtask;
 import com.taskcli.task_manager.service.SubtaskService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -18,9 +17,28 @@ public class SubtaskController {
         this.subtaskService = subtaskService;
     }
 
-    @PatchMapping("/{id}/complete")
-    public ResponseEntity<Subtask> markComplete(@PathVariable Long id){
-        Subtask updated = subtaskService.markSubtaskAsComplete(id);
+    @PostMapping("/{taskId}")
+    public ResponseEntity<Subtask> createSubtask(@PathVariable Long taskId, @RequestBody Subtask subtask) {
+        Subtask createdSubtask = subtaskService.createSubtask(subtask, taskId);
+        return ResponseEntity.ok(createdSubtask);
+    }
+
+    @GetMapping("/task/{taskId}")
+    public ResponseEntity<List<Subtask>> getSubtasksByTask(@PathVariable Long taskId) {
+        List<Subtask> subtasks = subtaskService.getSubtasksByTaskId(taskId);
+        return ResponseEntity.ok(subtasks);
+    }
+
+    @PutMapping("/{subtaskId}/status")
+    public ResponseEntity<Subtask> updateStatus(@PathVariable Long subtaskId, @RequestParam boolean completed) {
+        Subtask updated = subtaskService.updateSubtaskStatus(subtaskId, completed);
         return ResponseEntity.ok(updated);
     }
+
+    @DeleteMapping("/{subtaskId}")
+    public ResponseEntity<Void> deleteSubtask(@PathVariable Long subtaskId) {
+        subtaskService.deleteSubtask(subtaskId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
