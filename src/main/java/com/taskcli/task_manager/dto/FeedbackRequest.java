@@ -4,14 +4,14 @@ package com.taskcli.task_manager.dto;
 public class FeedbackRequest {
     private Long managerId;
     private String message;
-    private boolean isPublic;
+    private boolean publicFeedback;
 
-    public boolean isPublic() {
-        return isPublic;
+    public boolean isPublicFeedback() {
+        return publicFeedback;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setPublicFeedback(boolean publicFeedback) {
+        this.publicFeedback = publicFeedback;
     }
 
     public Long getManagerId() {

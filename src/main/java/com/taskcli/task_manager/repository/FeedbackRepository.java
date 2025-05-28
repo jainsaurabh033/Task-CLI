@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     List<Feedback> findByTask(Task task);
-    List<Feedback> findByTaskAndIsPublicTrue(Task task);
+    List<Feedback> findByTaskAndPublicFeedbackTrue(Task task);
 }

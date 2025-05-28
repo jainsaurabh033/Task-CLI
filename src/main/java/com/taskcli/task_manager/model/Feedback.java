@@ -11,7 +11,7 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String message;
-    private boolean isPublic;
+    private boolean publicFeedback;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
@@ -48,12 +48,12 @@ public class Feedback {
         this.id = id;
     }
 
-    public boolean isPublic() {
-        return isPublic;
+    public boolean isPublicFeedback() {
+        return publicFeedback;
     }
 
-    public void setPublic(boolean isPublic) {
-        this.isPublic = isPublic;
+    public void setPublicFeedback(boolean publicFeedback) {
+        this.publicFeedback = publicFeedback;
     }
 
     public String getMessage() {

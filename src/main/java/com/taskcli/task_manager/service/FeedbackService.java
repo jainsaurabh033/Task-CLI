@@ -38,7 +38,7 @@ public class FeedbackService {
         feedback.setTask(optionalTask.get());
         feedback.setManager(optionalManager.get());
         feedback.setMessage(request.getMessage());
-        feedback.setPublic(request.isPublic());
+        feedback.setPublicFeedback(request.isPublicFeedback());
 
         feedbackRepository.save(feedback);
         return feedback;
@@ -57,6 +57,6 @@ public class FeedbackService {
         if(optionalTask.isEmpty()){
             throw new RuntimeException("Task not found");
         }
-        return feedbackRepository.findByTaskAndIsPublicTrue(optionalTask.get());
+        return feedbackRepository.findByTaskAndPublicFeedbackTrue(optionalTask.get());
     }
 }
