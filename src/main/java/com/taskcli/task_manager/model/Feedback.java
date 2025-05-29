@@ -24,6 +24,16 @@ public class Feedback {
     private User manager;
     private LocalDate givenAt = LocalDate.now();
 
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    private Integer rating;
+
     public LocalDate getGivenAt() {
         return givenAt;
     }

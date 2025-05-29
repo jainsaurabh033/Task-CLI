@@ -9,6 +9,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.swing.text.html.Option;
+
 @Service
 public class UserService {
 
@@ -20,6 +22,11 @@ public class UserService {
     }
 
     public User registerUser(RegisterRequest request) {
+        Optional<User> existingUser = userRepository.findByEmail(request.getEmail());
+        if(existingUser.isPresent()){
+            throw new RuntimeException("User already exists with email: " + request.getEmail());
+        }
+
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());

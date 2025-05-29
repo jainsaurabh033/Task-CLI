@@ -19,6 +19,16 @@ public class TaskCreateRequest {
     @FutureOrPresent(message = "Due date must be today or in the future")
     private LocalDate dueDate;
 
+    private Long sprintId;
+
+    public Long getSprintId() {
+        return sprintId;
+    }
+
+    public void setSprintId(Long sprintId) {
+        this.sprintId = sprintId;
+    }
+
     public String getDescription() {
         return description;
     }

@@ -1,5 +1,6 @@
 package com.taskcli.task_manager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.taskcli.task_manager.Enum.TaskStatus;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +33,17 @@ public class Task {
     private List<Subtask> subtasks;
     private LocalDate dueDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sprint_id")
+    private Sprint sprint;
+
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(Sprint sprint) {
+        this.sprint = sprint;
+    }
 
     public User getCreator() {
         return creator;

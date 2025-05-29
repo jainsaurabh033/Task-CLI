@@ -45,4 +45,10 @@ public class TaskController {
             @RequestParam Long userId) {
         return ResponseEntity.ok(taskService.getCompletedTaskHistoryForUser(userId));
     }
+
+    @PutMapping("/{taskId}/complete")
+    public ResponseEntity<Task> markTaskCompleted(@PathVariable Long taskId){
+        Task updatedTask = taskService.markTaskAsCompleted(taskId);
+        return ResponseEntity.ok(updatedTask);
+    }
 }

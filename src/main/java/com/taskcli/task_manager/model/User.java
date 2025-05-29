@@ -1,5 +1,6 @@
 package com.taskcli.task_manager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.taskcli.task_manager.Enum.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

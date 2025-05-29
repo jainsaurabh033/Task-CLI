@@ -1,5 +1,6 @@
 package com.taskcli.task_manager.controller;
 
+import com.taskcli.task_manager.dto.FeedbackRequest;
 import com.taskcli.task_manager.model.Subtask;
 import com.taskcli.task_manager.service.SubtaskService;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class SubtaskController {
     }
 
     @GetMapping("/task/{taskId}")
-    public ResponseEntity<List<SubtaskResponse>> getSubtasksByTask(@PathVariable Long taskId) {
-        List<SubtaskResponse> responses  = subtaskService.getSubtasksByTaskId(taskId);
+    public ResponseEntity<List<FeedbackRequest.SubtaskResponse>> getSubtasksByTask(@PathVariable Long taskId) {
+        List<FeedbackRequest.SubtaskResponse> responses  = subtaskService.getSubtasksByTaskId(taskId);
         return ResponseEntity.ok(responses);
     }
 
