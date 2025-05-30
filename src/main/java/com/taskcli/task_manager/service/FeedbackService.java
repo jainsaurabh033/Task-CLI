@@ -38,6 +38,7 @@ public class FeedbackService {
         feedback.setTask(optionalTask.get());
         feedback.setManager(optionalManager.get());
         feedback.setMessage(request.getMessage());
+        feedback.setReceiver(optionalTask.get().getCreator());
         feedback.setPublicFeedback(request.isPublicFeedback());
 
         feedbackRepository.save(feedback);

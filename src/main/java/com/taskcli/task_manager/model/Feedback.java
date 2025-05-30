@@ -24,6 +24,19 @@ public class Feedback {
     private User manager;
     private LocalDate givenAt = LocalDate.now();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiver_id")
+    @JsonIgnore
+    private User receiver;
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
+    }
+
     public Integer getRating() {
         return rating;
     }

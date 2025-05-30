@@ -37,6 +37,7 @@ public class TaskService {
 
     @Transactional
     public Task createTask(TaskCreateRequest request, Long creatorId){
+        System.out.println("Looking for creatorId = " + creatorId);
         Optional<User> optionalUser = userRepository.findById(creatorId);
         if(optionalUser.isEmpty()){
             throw new RuntimeException("User not found");

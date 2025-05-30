@@ -15,5 +15,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 
     Optional<Feedback> findByTaskAndPublicFeedbackFalse(Task task);
     int countByTask(Task task);
+    List<Feedback> findByReceiverId(Long receiverId);
 
 }
