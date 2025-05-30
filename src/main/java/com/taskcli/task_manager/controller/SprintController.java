@@ -1,7 +1,10 @@
 package com.taskcli.task_manager.controller;
 
 import com.taskcli.task_manager.dto.SprintAnalyticsResponse;
+import com.taskcli.task_manager.dto.SprintCreateRequest;
+import com.taskcli.task_manager.model.Sprint;
 import com.taskcli.task_manager.service.SprintService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +16,12 @@ public class SprintController {
 
     public SprintController(SprintService sprintService) {
         this.sprintService = sprintService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Sprint> createSprint(@Valid @RequestBody SprintCreateRequest request){
+        Sprint sprint = sprintService.createSprint(request);
+        return ResponseEntity.ok(sprint);
     }
 
     @GetMapping("/{sprintId}/analytics")

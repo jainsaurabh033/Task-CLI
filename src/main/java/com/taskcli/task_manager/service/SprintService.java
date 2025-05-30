@@ -1,12 +1,16 @@
 package com.taskcli.task_manager.service;
 
+import com.taskcli.task_manager.Enum.Role;
 import com.taskcli.task_manager.Enum.TaskStatus;
 import com.taskcli.task_manager.dto.SprintAnalyticsResponse;
+import com.taskcli.task_manager.dto.SprintCreateRequest;
 import com.taskcli.task_manager.model.Sprint;
 import com.taskcli.task_manager.model.Task;
+import com.taskcli.task_manager.model.User;
 import com.taskcli.task_manager.repository.FeedbackRepository;
 import com.taskcli.task_manager.repository.SprintRepository;
 import com.taskcli.task_manager.repository.TaskRepository;
+import com.taskcli.task_manager.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +22,35 @@ public class SprintService {
     private final SprintRepository sprintRepository;
     private final TaskRepository taskRepository;
     private final FeedbackRepository feedbackRepository;
+    private final UserRepository userRepository;
 
     public SprintService(SprintRepository sprintRepository,
                          TaskRepository taskRepository,
-                         FeedbackRepository feedbackRepository) {
+                         FeedbackRepository feedbackRepository,
+                         UserRepository userRepository) {
         this.sprintRepository = sprintRepository;
         this.taskRepository = taskRepository;
         this.feedbackRepository = feedbackRepository;
+        this.userRepository = userRepository;
+    }
+
+    public Sprint createSprint(SprintCreateRequest request){
+        Optional<User> manager = userRepository.findById(request.getManagerId());
+
+        if(manager.isEmpty()){
+            throw new RuntimeException("Manager not found with ID");
+        }
+
+        if(!manager.get().getRole().equals(Role.MANAGER)){
+            throw new RuntimeException("Only managers can create sprints");
+        }
+
+        Sprint sprint = new Sprint();
+        sprint.setTitle(request.getName());
+        sprint.setStartDate(request.getStartDate());
+        sprint.setEndDate(request.getEndDate());
+
+        return sprintRepository.save(sprint);
     }
 
     public SprintAnalyticsResponse getSprintAnalytics(Long sprintId) {
