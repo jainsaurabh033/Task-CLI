@@ -6,6 +6,7 @@ import com.taskcli.task_manager.model.Sprint;
 import com.taskcli.task_manager.service.SprintService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
