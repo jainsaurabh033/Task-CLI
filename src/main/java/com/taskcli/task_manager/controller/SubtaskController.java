@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/subtasks")
+@RequestMapping("/api/v1/subtasks")
 public class SubtaskController {
     private final SubtaskService subtaskService;
 

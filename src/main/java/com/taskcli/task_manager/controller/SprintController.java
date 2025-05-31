@@ -10,7 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/sprints")
+@RequestMapping("/api/v1/sprints")
 public class SprintController {
 
     private final SprintService sprintService;

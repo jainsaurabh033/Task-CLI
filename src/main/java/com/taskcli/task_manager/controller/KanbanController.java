@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/kanban")
+@RequestMapping("/api/v1/kanban")
 public class KanbanController {
     private final KanbanService kanbanService;
 

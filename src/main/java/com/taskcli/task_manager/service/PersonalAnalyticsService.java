@@ -7,14 +7,12 @@ import com.taskcli.task_manager.model.Feedback;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.repository.FeedbackRepository;
 import com.taskcli.task_manager.repository.TaskRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class PersonalAnalyticsService {
 
     private final TaskRepository taskRepository;
