@@ -1,5 +1,6 @@
 package com.taskcli.task_manager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.taskcli.task_manager.Enum.TaskStatus;
 import jakarta.persistence.*;
@@ -35,6 +36,7 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sprint_id")
+    @JsonIgnore
     private Sprint sprint;
 
     public Sprint getSprint() {
