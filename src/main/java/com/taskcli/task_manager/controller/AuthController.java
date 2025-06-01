@@ -37,6 +37,25 @@ public class AuthController {
         this.userRepository = userRepository;
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
+        try {
+            Role role = Role.valueOf(request.getRole().toUpperCase());
+
+            User user = new User();
+            user.setEmail(request.getEmail());
+            user.setName(request.getName());
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+            user.setRole(role);
+
+            userRepository.save(user);
+            return ResponseEntity.ok("Registered");
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid role. Allowed values: MEMBER, MANAGER");
+        }
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
         try {
@@ -67,27 +86,6 @@ public class AuthController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(401).body("Invalid credentials");
-        }
-    }
-
-
-
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
-        try {
-            Role role = Role.valueOf(request.getRole().toUpperCase());
-
-            User user = new User();
-            user.setEmail(request.getEmail());
-            user.setName(request.getName());
-            user.setPassword(passwordEncoder.encode(request.getPassword()));
-            user.setRole(role);
-
-            userRepository.save(user);
-            return ResponseEntity.ok("Registered");
-
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Invalid role. Allowed values: MEMBER, MANAGER");
         }
     }
 }
