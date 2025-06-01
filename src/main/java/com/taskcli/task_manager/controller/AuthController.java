@@ -44,15 +44,25 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
             );
 
+            User user = userRepository.findByEmail(request.getEmail())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
             UserDetails userDetails = new org.springframework.security.core.userdetails.User(
                     request.getEmail(), "",
-                    List.of(new SimpleGrantedAuthority("ROLE_" +
-                            userRepository.findByEmail(request.getEmail())
-                                    .orElseThrow().getRole().name()))
+                    List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()))
             );
 
             String token = jwtUtil.generateToken(userDetails);
-            return ResponseEntity.ok(new AuthResponse(token));
+
+            AuthResponse response = new AuthResponse(
+                    user.getEmail(),
+                    user.getId(),
+                    user.getName(),
+                    user.getRole(),
+                    token
+            );
+
+            return ResponseEntity.ok(response);
 
         } catch (Exception e) {
             e.printStackTrace();
