@@ -3,10 +3,10 @@ package com.taskcli.task_manager.dto.ResponseDTO;
 import lombok.Data;
 
 @Data
-public class SuccessRegisterResponse {
+public class RegisterResponse {
     private String message;
 
-    public SuccessRegisterResponse(String message) {
+    public RegisterResponse(String message) {
         this.message = message;
     }
 }

@@ -3,9 +3,8 @@ package com.taskcli.task_manager.service;
 import com.taskcli.task_manager.Enum.Role;
 import com.taskcli.task_manager.dto.RequestDTO.AuthRequest;
 import com.taskcli.task_manager.dto.RequestDTO.RegisterRequest;
-import com.taskcli.task_manager.dto.ResponseDTO.AuthResponse;
-import com.taskcli.task_manager.dto.ResponseDTO.SuccessLoginResponse;
-import com.taskcli.task_manager.dto.ResponseDTO.SuccessRegisterResponse;
+import com.taskcli.task_manager.dto.ResponseDTO.LoginResponse;
+import com.taskcli.task_manager.dto.ResponseDTO.RegisterResponse;
 import com.taskcli.task_manager.exception.Custom.InvalidCredentialsException;
 import com.taskcli.task_manager.exception.Custom.UserAlreadyExistsException;
 import com.taskcli.task_manager.model.User;
@@ -37,7 +36,7 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public SuccessRegisterResponse register(RegisterRequest request) throws BadRequestException {
+    public RegisterResponse register(RegisterRequest request) throws BadRequestException {
         if(userRepository.existsByEmail(request.getEmail())){
             throw new UserAlreadyExistsException("Email already registered: " + request.getEmail());
         }
@@ -57,10 +56,10 @@ public class AuthService {
 
         userRepository.save(user);
 
-        return new SuccessRegisterResponse("Registered successfully");
+        return new RegisterResponse("Registered successfully");
     }
 
-    public SuccessLoginResponse login(AuthRequest request){
+    public LoginResponse login(AuthRequest request){
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     request.getEmail(), request.getPassword()
@@ -78,7 +77,7 @@ public class AuthService {
 
         String token = jwtUtil.generateToken(userDetails);
 
-        return new SuccessLoginResponse(
+        return new LoginResponse(
                 user.getEmail(),
                 user.getId(),
                 user.getName(),
