@@ -2,6 +2,7 @@ package com.taskcli.task_manager.controller;
 
 import com.taskcli.task_manager.dto.RequestDTO.TaskCreateRequest;
 import com.taskcli.task_manager.dto.ResponseDTO.TaskHistoryResponse;
+import com.taskcli.task_manager.dto.ResponseDTO.UserProfileResponse;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,8 +22,6 @@ public class TaskController {
 
     private final TaskService taskService;
 
-
-    @Operation(summary = "Create a new task")
     @PostMapping
     public ResponseEntity<Task> createTask(
             @Valid @RequestBody TaskCreateRequest request,
@@ -33,7 +32,6 @@ public class TaskController {
     }
 
 
-    @Operation(summary = "Get tasks for a user")
     @GetMapping
     public ResponseEntity<Page<Task>> getUserTasks(
             @RequestParam Long userId,
@@ -44,14 +42,12 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTasksByUser(userId, page, size));
     }
 
-    @Operation(summary = "Get completed task history with feedback")
     @GetMapping("/history")
     public ResponseEntity<List<TaskHistoryResponse>> getCompletedTasksWithFeedback(
             @RequestParam Long userId) {
         return ResponseEntity.ok(taskService.getCompletedTaskHistoryForUser(userId));
     }
 
-    @Operation(summary = "Mark task as completed")
     @PutMapping("/{taskId}/complete")
     public ResponseEntity<Task> markTaskCompleted(@PathVariable Long taskId){
         Task updatedTask = taskService.markTaskAsCompleted(taskId);

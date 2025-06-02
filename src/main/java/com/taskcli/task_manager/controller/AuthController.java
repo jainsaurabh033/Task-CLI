@@ -4,14 +4,12 @@ import com.taskcli.task_manager.dto.RequestDTO.AuthRequest;
 import com.taskcli.task_manager.dto.RequestDTO.RegisterRequest;
 import com.taskcli.task_manager.dto.ResponseDTO.LoginResponse;
 import com.taskcli.task_manager.dto.ResponseDTO.RegisterResponse;
+import com.taskcli.task_manager.dto.ResponseDTO.UserProfileResponse;
 import com.taskcli.task_manager.service.AuthService;
 import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -32,6 +30,12 @@ public class AuthController{
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody AuthRequest request){
         LoginResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserProfileResponse> getCurrentUser(){
+        UserProfileResponse response = authService.getCurrentUserProfile();
         return ResponseEntity.ok(response);
     }
 }

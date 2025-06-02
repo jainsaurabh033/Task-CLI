@@ -4,6 +4,7 @@ import com.taskcli.task_manager.Enum.Role;
 import com.taskcli.task_manager.Enum.TaskStatus;
 import com.taskcli.task_manager.dto.ResponseDTO.SprintAnalyticsResponse;
 import com.taskcli.task_manager.dto.RequestDTO.SprintCreateRequest;
+import com.taskcli.task_manager.dto.ResponseDTO.SprintResponse;
 import com.taskcli.task_manager.model.Sprint;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.model.User;
@@ -11,8 +12,10 @@ import com.taskcli.task_manager.repository.FeedbackRepository;
 import com.taskcli.task_manager.repository.SprintRepository;
 import com.taskcli.task_manager.repository.TaskRepository;
 import com.taskcli.task_manager.repository.UserRepository;
+import com.taskcli.task_manager.util.AuthUtil;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,5 +87,25 @@ public class SprintService {
         response.setAverageRating(rate);
 
         return response;
+    }
+
+    public SprintResponse getCurrentSprintForCurrentUser(){
+        String email = AuthUtil.getCurrentUserEmail();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new RuntimeException("User not found"));
+
+        LocalDate today = LocalDate.now();
+
+        Sprint sprint = sprintRepository.findAll().stream()
+                .filter(s-> !s.getStartDate().isAfter(today) && !s.getEndDate().isBefore(today))
+                .findFirst()
+                .orElseThrow(()-> new RuntimeException("No active sprint found for today"));
+
+        return new SprintResponse(
+                sprint.getId(),
+                sprint.getTitle(),
+                sprint.getStartDate(),
+                sprint.getEndDate()
+        );
     }
 }

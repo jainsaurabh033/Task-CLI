@@ -5,11 +5,13 @@ import com.taskcli.task_manager.dto.RequestDTO.AuthRequest;
 import com.taskcli.task_manager.dto.RequestDTO.RegisterRequest;
 import com.taskcli.task_manager.dto.ResponseDTO.LoginResponse;
 import com.taskcli.task_manager.dto.ResponseDTO.RegisterResponse;
+import com.taskcli.task_manager.dto.ResponseDTO.UserProfileResponse;
 import com.taskcli.task_manager.exception.Custom.InvalidCredentialsException;
 import com.taskcli.task_manager.exception.Custom.UserAlreadyExistsException;
 import com.taskcli.task_manager.model.User;
 import com.taskcli.task_manager.repository.UserRepository;
 import com.taskcli.task_manager.security.JwtUtil;
+import com.taskcli.task_manager.util.AuthUtil;
 import org.apache.coyote.BadRequestException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -83,6 +85,20 @@ public class AuthService {
                 user.getName(),
                 user.getRole(),
                 token
+        );
+    }
+
+    public UserProfileResponse getCurrentUserProfile(){
+        String email = AuthUtil.getCurrentUserEmail();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new InvalidCredentialsException("User not found"));
+
+        return new UserProfileResponse(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getRole()
         );
     }
 }

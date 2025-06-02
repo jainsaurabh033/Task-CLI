@@ -2,6 +2,7 @@ package com.taskcli.task_manager.controller;
 
 import com.taskcli.task_manager.dto.ResponseDTO.SprintAnalyticsResponse;
 import com.taskcli.task_manager.dto.RequestDTO.SprintCreateRequest;
+import com.taskcli.task_manager.dto.ResponseDTO.SprintResponse;
 import com.taskcli.task_manager.model.Sprint;
 import com.taskcli.task_manager.service.SprintService;
 import jakarta.validation.Valid;
@@ -16,6 +17,12 @@ public class SprintController {
 
     public SprintController(SprintService sprintService) {
         this.sprintService = sprintService;
+    }
+
+    @GetMapping("/current")
+    public ResponseEntity<SprintResponse> getCurrentSprintForUser(){
+        SprintResponse response = sprintService.getCurrentSprintForCurrentUser();
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
