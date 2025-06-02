@@ -1,6 +1,6 @@
 package com.taskcli.task_manager.controller;
 
-import com.taskcli.task_manager.dto.PersonalAnalyticsResponseDTO;
+import com.taskcli.task_manager.dto.ResponseDTO.PersonalAnalyticsResponseDTO;
 import com.taskcli.task_manager.service.PersonalAnalyticsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

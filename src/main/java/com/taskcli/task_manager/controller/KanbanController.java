@@ -1,6 +1,6 @@
 package com.taskcli.task_manager.controller;
 
-import com.taskcli.task_manager.dto.KanbanTaskResponseDTO;
+import com.taskcli.task_manager.dto.ResponseDTO.KanbanTaskResponseDTO;
 import com.taskcli.task_manager.service.KanbanService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,12 +1,11 @@
 package com.taskcli.task_manager.controller;
 
-import com.taskcli.task_manager.dto.SprintAnalyticsResponse;
-import com.taskcli.task_manager.dto.SprintCreateRequest;
+import com.taskcli.task_manager.dto.ResponseDTO.SprintAnalyticsResponse;
+import com.taskcli.task_manager.dto.RequestDTO.SprintCreateRequest;
 import com.taskcli.task_manager.model.Sprint;
 import com.taskcli.task_manager.service.SprintService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

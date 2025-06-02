@@ -1,9 +1,8 @@
 package com.taskcli.task_manager.service;
 
 import com.taskcli.task_manager.Enum.TaskStatus;
-import com.taskcli.task_manager.dto.SprintAnalyticsResponse;
-import com.taskcli.task_manager.dto.TaskCreateRequest;
-import com.taskcli.task_manager.dto.TaskHistoryResponse;
+import com.taskcli.task_manager.dto.RequestDTO.TaskCreateRequest;
+import com.taskcli.task_manager.dto.ResponseDTO.TaskHistoryResponse;
 import com.taskcli.task_manager.model.*;
 import com.taskcli.task_manager.repository.*;
 import jakarta.transaction.Transactional;

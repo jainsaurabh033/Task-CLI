@@ -1,6 +1,6 @@
 package com.taskcli.task_manager.controller;
 
-import com.taskcli.task_manager.dto.FeedbackRequest;
+import com.taskcli.task_manager.dto.RequestDTO.FeedbackRequest;
 import com.taskcli.task_manager.model.Subtask;
 import com.taskcli.task_manager.service.SubtaskService;
 import org.springframework.http.ResponseEntity;

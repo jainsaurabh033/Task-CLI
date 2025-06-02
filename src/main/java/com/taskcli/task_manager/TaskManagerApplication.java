@@ -17,17 +17,4 @@ public class TaskManagerApplication {
 		SpringApplication.run(TaskManagerApplication.class, args);
 	}
 
-//	@Bean
-//	public CommandLineRunner logAllBeans(ApplicationContext ctx) {
-//		return args -> {
-//			System.out.println("📦 Loaded Beans:");
-//			String[] beans = ctx.getBeanDefinitionNames();
-//			Arrays.sort(beans);
-//			for (String bean : beans) {
-//				if (bean.toLowerCase().contains("controller")) {
-//					System.out.println("🔹 " + bean);
-//				}
-//			}
-//		};
-//	}
 }

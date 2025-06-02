@@ -2,8 +2,8 @@ package com.taskcli.task_manager.service;
 
 import com.taskcli.task_manager.Enum.Role;
 import com.taskcli.task_manager.Enum.TaskStatus;
-import com.taskcli.task_manager.dto.SprintAnalyticsResponse;
-import com.taskcli.task_manager.dto.SprintCreateRequest;
+import com.taskcli.task_manager.dto.ResponseDTO.SprintAnalyticsResponse;
+import com.taskcli.task_manager.dto.RequestDTO.SprintCreateRequest;
 import com.taskcli.task_manager.model.Sprint;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.model.User;

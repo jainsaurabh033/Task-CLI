@@ -1,6 +1,6 @@
 package com.taskcli.task_manager.service;
 
-import com.taskcli.task_manager.dto.FeedbackRequest;
+import com.taskcli.task_manager.dto.RequestDTO.FeedbackRequest;
 import com.taskcli.task_manager.model.Feedback;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.model.User;

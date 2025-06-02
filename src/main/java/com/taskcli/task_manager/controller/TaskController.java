@@ -1,7 +1,7 @@
 package com.taskcli.task_manager.controller;
 
-import com.taskcli.task_manager.dto.TaskCreateRequest;
-import com.taskcli.task_manager.dto.TaskHistoryResponse;
+import com.taskcli.task_manager.dto.RequestDTO.TaskCreateRequest;
+import com.taskcli.task_manager.dto.ResponseDTO.TaskHistoryResponse;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;

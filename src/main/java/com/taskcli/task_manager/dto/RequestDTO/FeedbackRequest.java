@@ -1,4 +1,4 @@
-package com.taskcli.task_manager.dto;
+package com.taskcli.task_manager.dto.RequestDTO;
 
 
 public class FeedbackRequest {

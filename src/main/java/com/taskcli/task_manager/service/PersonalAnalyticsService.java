@@ -1,8 +1,8 @@
 package com.taskcli.task_manager.service;
 
 import com.taskcli.task_manager.Enum.TaskStatus;
-import com.taskcli.task_manager.dto.PersonalAnalyticsResponseDTO;
-import com.taskcli.task_manager.dto.RecentFeedbackDTO;
+import com.taskcli.task_manager.dto.ResponseDTO.PersonalAnalyticsResponseDTO;
+import com.taskcli.task_manager.dto.ResponseDTO.RecentFeedbackDTO;
 import com.taskcli.task_manager.model.Feedback;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.repository.FeedbackRepository;

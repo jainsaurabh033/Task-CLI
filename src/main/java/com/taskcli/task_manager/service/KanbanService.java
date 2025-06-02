@@ -1,7 +1,7 @@
 package com.taskcli.task_manager.service;
 
 import com.taskcli.task_manager.Enum.TaskStatus;
-import com.taskcli.task_manager.dto.KanbanTaskResponseDTO;
+import com.taskcli.task_manager.dto.ResponseDTO.KanbanTaskResponseDTO;
 import com.taskcli.task_manager.model.Task;
 import com.taskcli.task_manager.repository.TaskRepository;
 import org.springframework.stereotype.Service;

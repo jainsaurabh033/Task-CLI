@@ -1,9 +1,9 @@
 package com.taskcli.task_manager.controller;
 
 import com.taskcli.task_manager.Enum.Role;
-import com.taskcli.task_manager.dto.AuthRequest;
-import com.taskcli.task_manager.dto.AuthResponse;
-import com.taskcli.task_manager.dto.RegisterRequest;
+import com.taskcli.task_manager.dto.RequestDTO.AuthRequest;
+import com.taskcli.task_manager.dto.ResponseDTO.AuthResponse;
+import com.taskcli.task_manager.dto.RequestDTO.RegisterRequest;
 import com.taskcli.task_manager.model.User;
 import com.taskcli.task_manager.repository.UserRepository;
 import com.taskcli.task_manager.security.JwtUtil;

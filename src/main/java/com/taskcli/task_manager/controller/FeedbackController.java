@@ -1,9 +1,8 @@
 package com.taskcli.task_manager.controller;
 
-import com.taskcli.task_manager.dto.FeedbackRequest;
+import com.taskcli.task_manager.dto.RequestDTO.FeedbackRequest;
 import com.taskcli.task_manager.model.Feedback;
 import com.taskcli.task_manager.service.FeedbackService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
