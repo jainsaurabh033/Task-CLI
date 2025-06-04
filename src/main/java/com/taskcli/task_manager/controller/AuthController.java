@@ -1,5 +1,6 @@
 package com.taskcli.task_manager.controller;
 
+import com.taskcli.task_manager.RateLimiter.RequestLimiter;
 import com.taskcli.task_manager.dto.RequestDTO.AuthRequest;
 import com.taskcli.task_manager.dto.RequestDTO.RegisterRequest;
 import com.taskcli.task_manager.dto.ResponseDTO.LoginResponse;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController{
 
     private final AuthService authService;
+    private final RequestLimiter requestLimiter;
 
-    public AuthController(AuthService authService){
+    public AuthController(AuthService authService, RequestLimiter requestLimiter){
         this.authService = authService;
+        this.requestLimiter = requestLimiter;
     }
 
     @PostMapping("/register")
@@ -29,6 +32,12 @@ public class AuthController{
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody AuthRequest request){
+
+        if (!requestLimiter.isAllowed(request.getEmail())) {
+            System.out.println("RateLimiter hit");
+            return ResponseEntity.status(429).body(null);
+        }
+
         LoginResponse response = authService.login(request);
         return ResponseEntity.ok(response);
     }
